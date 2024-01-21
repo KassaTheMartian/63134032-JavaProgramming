@@ -16,6 +16,8 @@ public class Bai2 {
 		System.out.println("Chu vi là : " + chuVi + " cm");
 		System.out.println("Diện tích là : " + dienTich +" cm2");
 		System.out.println("Cạnh nhỏ nhất là : " + canhNhoNhat +" cm");
+        scanner.close();
+
 	}
 
 }
