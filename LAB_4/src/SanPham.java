@@ -23,7 +23,7 @@ public class SanPham {
         this.giamGia = giamGia;
     }
 	
-	public double getThueNhapKhau()
+	private double getThueNhapKhau()
 	{
         return 0.1 * donGia;
 	}
@@ -54,13 +54,45 @@ public class SanPham {
 	
 	public static void main(String[] args) {
         // Sử dụng lớp SanPham
-        SanPham sp = new SanPham("Laptop", 1000, 100);
-        sp.xuat();
+        SanPham sp1 = new SanPham("Laptop", 1000, 100);
+        sp1.xuat();
 
         // Nhập thông tin từ người dùng
-        SanPham spMoi = new SanPham();
-        spMoi.nhap();
-        spMoi.xuat();
+        SanPham sp2 = new SanPham();
+        sp2.nhap();
+        sp2.xuat();
+        
+        
+        SanPham sp3 = new SanPham("Mac Book", 1000, 0);
+        sp3.xuat();
+
+	}
+
+	
+	public String getTenSp()
+	{ 
+		return this.tenSp; 
+	} 
+	public double getDonGia()
+	{ 
+		return this.donGia; 
+	} 
+	public double getGiamGia()
+	{ 
+		return this.giamGia; 
+	} 
+	
+	public void setTenSp(String tenSp)
+	{ 
+		this.tenSp = tenSp; 
+	} 
+	public void setDonGia(double donGia)
+	{ 
+		this.donGia = donGia; 
+	}
+	public void setGiamGia(double giamGia)
+	{ 
+		this.giamGia = giamGia; 
 	}
 
 }
