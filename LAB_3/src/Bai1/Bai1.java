@@ -22,5 +22,6 @@ public class Bai1 {
 		if (flag == true) System.out.println(n+ " là số nguyên tố");
 		else System.out.println(n+ " không phải là số nguyên tố");
 
+		scanner.close();
 	}
 }
