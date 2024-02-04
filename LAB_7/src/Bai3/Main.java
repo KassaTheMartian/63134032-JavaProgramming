@@ -7,24 +7,50 @@ public class Main {
 
 	public static void main(String[] args) {
 		ArrayList<SinhVienNTU> danhSachSv = new ArrayList<SinhVienNTU>();
+		Scanner scanner = new Scanner(System.in);
+        while (true) {
+            menu();
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Đọc dòng mới sau khi nhập lựa chọn
 
-		nhap(danhSachSv);
-        System.out.println("Danh sách sinh viên: ");
-		xuat(danhSachSv);
-		
-        System.out.println("Danh sách sinh viên giỏi: ");
-		SVGioi(danhSachSv);
-		
-        System.out.println("Danh sách sinh viên đã sắp xếp theo điểm: ");
-        SapXep(danhSachSv);		
-        xuat(danhSachSv);
-
+            switch (choice) {
+                case 1:
+            		nhap(danhSachSv, scanner);
+                    break;
+                case 2:
+                    xuat(danhSachSv);
+                    break;
+                case 3:
+            		SVGioi(danhSachSv);
+                    break;
+                case 4:
+                    SapXep(danhSachSv);		
+                    break;
+                case 5:
+                    System.out.println("Kết thúc chương trình.");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+            }
+        }
 	}
 
-	
-	public static void nhap(ArrayList<SinhVienNTU> danhSachSv)
+	public static void menu()
 	{
-		Scanner scanner = new Scanner(System.in);
+        System.out.println("\t========================================");
+		System.out.println("\t1. Nhập danh sách sinh viên \n"
+				+ "\t2. Xuất thông tin danh sách sinh viên \n"
+				+ "\t3. Xuất danh sách sinh viên có học lực giỏi \n"
+				+ "\t4.  Sắp xếp danh sách sinh viên theo điểm \n"
+				+ "\t5.  Kết thúc ");
+        System.out.println("\t========================================");
+        System.out.print("\tChọn chức năng: ");
+
+	}
+	
+	public static void nhap(ArrayList<SinhVienNTU> danhSachSv, Scanner scanner)
+	{
 		boolean flag = true;
 		while (true) {
 			String check = "Y";
