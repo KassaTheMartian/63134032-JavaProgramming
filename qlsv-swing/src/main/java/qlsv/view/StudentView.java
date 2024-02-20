@@ -62,6 +62,7 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // khởi tạo các phím chức năng
         addStudentBtn = new JButton("Thêm");
+                
         editStudentBtn = new JButton("Sửa");
         deleteStudentBtn = new JButton("Xóa");
         clearBtn = new JButton("Làm mới");
@@ -149,19 +150,19 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
         layout.putConstraint(SpringLayout.WEST, jScrollPaneStudentTable, 300, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, jScrollPaneStudentTable, 10, SpringLayout.NORTH, panel);
          
-        layout.putConstraint(SpringLayout.WEST, addStudentBtn, 20, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.WEST, addStudentBtn, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, addStudentBtn, 240, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, editStudentBtn, 60, SpringLayout.WEST, addStudentBtn);
+        layout.putConstraint(SpringLayout.WEST, editStudentBtn, 70, SpringLayout.WEST, addStudentBtn);
         layout.putConstraint(SpringLayout.NORTH, editStudentBtn, 240, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, deleteStudentBtn, 60, SpringLayout.WEST, editStudentBtn);
          
         layout.putConstraint(SpringLayout.NORTH, clearBtn, 240, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, clearBtn, 80, SpringLayout.WEST, deleteStudentBtn);
+        layout.putConstraint(SpringLayout.WEST, clearBtn, 70, SpringLayout.WEST, deleteStudentBtn);
          
         layout.putConstraint(SpringLayout.NORTH, deleteStudentBtn, 240, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sortStudentGPABtn, 300, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, sortStudentGPABtn, 330, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, sortStudentNameBtn, 115, SpringLayout.WEST, sortStudentGPABtn);
+        layout.putConstraint(SpringLayout.WEST, sortStudentNameBtn, 155, SpringLayout.WEST, sortStudentGPABtn);
         layout.putConstraint(SpringLayout.NORTH, sortStudentNameBtn, 330, SpringLayout.NORTH, panel);
     
         this.add(panel);
@@ -173,5 +174,184 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
         deleteStudentBtn.setEnabled(false);
         // enable Add button
         addStudentBtn.setEnabled(true);
+    }
+    
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
+    
+     //hiển thị list student vào bảng studentTable
+     //@param list
+    public void showListStudents(List<Student> list) {
+        int size = list.size();
+        // với bảng studentTable có 5 cột, 
+        // khởi tạo mảng 2 chiều students, trong đó:
+        // số hàng: là kích thước của list student 
+        // số cột: là 5
+        Object [][] students = new Object[size][5];
+        for (int i = 0; i < size; i++) {
+            students[i][0] = list.get(i).getId();
+            students[i][1] = list.get(i).getName();
+            students[i][2] = list.get(i).getAge();
+            students[i][3] = list.get(i).getAddress();
+            students[i][4] = list.get(i).getGPA();
+        }
+        studentTable.setModel(new DefaultTableModel(students, columnNames));
+    }
+    
+     // điền thông tin của hàng được chọn từ bảng student 
+     // vào các trường tương ứng của student.
+    public void fillStudentFromSelectedRow() {
+        // lấy chỉ số của hàng được chọn 
+        int row = studentTable.getSelectedRow();
+        if (row >= 0) {
+            idField.setText(studentTable.getModel().getValueAt(row, 0).toString());
+            nameField.setText(studentTable.getModel().getValueAt(row, 1).toString());
+            ageField.setText(studentTable.getModel().getValueAt(row, 2).toString());
+            addressTA.setText(studentTable.getModel().getValueAt(row, 3).toString());
+            gpaField.setText(studentTable.getModel().getValueAt(row, 4).toString());
+            // enable Edit and Delete buttons
+            editStudentBtn.setEnabled(true);
+            deleteStudentBtn.setEnabled(true);
+            // disable Add button
+            addStudentBtn.setEnabled(false);
+        }
+    }
+    
+     // xóa thông tin student
+    public void clearStudentInfo() {
+        idField.setText("");
+        nameField.setText("");
+        ageField.setText("");
+        addressTA.setText("");
+        gpaField.setText("");
+        // disable Edit and Delete buttons
+        editStudentBtn.setEnabled(false);
+        deleteStudentBtn.setEnabled(false);
+        // enable Add button
+        addStudentBtn.setEnabled(true);
+    }
+    
+     // hiện thị thông tin student
+     // @param student
+    public void showStudent(Student student) {
+        idField.setText("" + student.getId());
+        nameField.setText(student.getName());
+        ageField.setText("" + student.getAge());
+        addressTA.setText(student.getAddress());
+        gpaField.setText("" + student.getGPA());
+        // enable Edit and Delete buttons
+        editStudentBtn.setEnabled(true);
+        deleteStudentBtn.setEnabled(true);
+        // disable Add button
+        addStudentBtn.setEnabled(false);
+    }
+    
+     // lấy thông tin student
+     // @return
+    public Student getStudentInfo() {
+        // validate student
+        if (!validateName() || !validateAge() || !validateAddress() || !validateGPA()) {
+            return null;
+        }
+        try {
+            Student student = new Student();
+            if (idField.getText() != null && !"".equals(idField.getText())) {
+                student.setId(Integer.parseInt(idField.getText()));
+            }
+            student.setName(nameField.getText().trim());
+            student.setAge(Byte.parseByte(ageField.getText().trim()));
+            student.setAddress(addressTA.getText().trim());
+            student.setGPA(Float.parseFloat(gpaField.getText().trim()));
+            return student;
+        } catch (Exception e) {
+            showMessage(e.getMessage());
+        }
+        return null;
+    }
+    private boolean validateName() {
+        String name = nameField.getText();
+        if (name == null || "".equals(name.trim())) {
+            nameField.requestFocus();
+            showMessage("Name không được trống.");
+            return false;
+        }
+        return true;
+    }
+     
+    private boolean validateAddress() {
+        String address = addressTA.getText();
+        if (address == null || "".equals(address.trim())) {
+            addressTA.requestFocus();
+            showMessage("Address không được trống.");
+            return false;
+        }
+        return true;
+    }
+     
+    private boolean validateAge() {
+        try {
+            Byte age = Byte.parseByte(ageField.getText().trim());
+            if (age < 0 || age > 100) {
+                ageField.requestFocus();
+                showMessage("Age không hợp lệ, age nên trong khoảng 0 đến 100.");
+                return false;
+            }
+        } catch (Exception e) {
+            ageField.requestFocus();
+            showMessage("Age không hợp lệ!");
+            return false;
+        }
+        return true;
+    }
+     
+    private boolean validateGPA() {
+        try {
+            Float gpa = Float.parseFloat(gpaField.getText().trim());
+            if (gpa < 0 || gpa > 10) {
+                gpaField.requestFocus();
+                showMessage("GPA không hợp lệ, gpa nên trong khoảng 0 đến 10.");
+                return false;
+            }
+        } catch (Exception e) {
+            gpaField.requestFocus();
+            showMessage("GPA không hợp lệ!");
+            return false;
+        }
+        return true;
+    }
+     
+    public void actionPerformed(ActionEvent e) {
+    }
+     
+    public void valueChanged(ListSelectionEvent e) {
+    }
+     
+    public void addAddStudentListener(ActionListener listener) {
+        addStudentBtn.addActionListener(listener);
+    }
+     
+    public void addEdiStudentListener(ActionListener listener) {
+        editStudentBtn.addActionListener(listener);
+    }
+     
+    public void addDeleteStudentListener(ActionListener listener) {
+        deleteStudentBtn.addActionListener(listener);
+    }
+     
+    public void addClearListener(ActionListener listener) {
+        clearBtn.addActionListener(listener);
+    }
+     
+    public void addSortStudentGPAListener(ActionListener listener) {
+        sortStudentGPABtn.addActionListener(listener);
+    }
+     
+    public void addSortStudentNameListener(ActionListener listener) {
+        sortStudentNameBtn.addActionListener(listener);
+    }
+     
+    public void addListStudentSelectionListener(ListSelectionListener listener) {
+        studentTable.getSelectionModel().addListSelectionListener(listener);
     }
 }

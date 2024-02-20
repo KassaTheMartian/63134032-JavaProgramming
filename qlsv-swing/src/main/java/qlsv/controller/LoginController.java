@@ -15,7 +15,7 @@ public class LoginController {
 	public LoginController(LoginView view)
 	{
 		this.loginView = view;
-		this.userDao = UserDao();
+		this.userDao = new UserDao();
 		view.addLoginListener(new LoginListener());
 	}
 	

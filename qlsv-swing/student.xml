@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<students>
+    <student>
+        <id>1</id>
+        <name>Nguyễn Trần Việt Hoàng</name>
+        <age>21</age>
+        <address>Diên Khánh</address>
+        <GPA>7.0</GPA>
+    </student>
+    <student>
+        <id>2</id>
+        <name>Hà Tứ Huy</name>
+        <age>21</age>
+        <address>Ninh Hòa</address>
+        <GPA>8.0</GPA>
+    </student>
+    <student>
+        <id>3</id>
+        <name>Nguyễn Đình Hiệu</name>
+        <age>21</age>
+        <address>Đắk Lắk</address>
+        <GPA>10.0</GPA>
+    </student>
+    <student>
+        <id>4</id>
+        <name>Kiều Thái Tuấn</name>
+        <age>21</age>
+        <address>Nha Trang</address>
+        <GPA>1.0</GPA>
+    </student>
+</students>

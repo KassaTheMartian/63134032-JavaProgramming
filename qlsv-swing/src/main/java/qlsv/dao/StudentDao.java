@@ -42,6 +42,17 @@ public class StudentDao {
         }
         return list;
     }
+     // thêm student vào listStudents và lưu listStudents vào file
+     // @param student
+    public void add(Student student) {
+        int id = 1;
+        if (listStudents != null && listStudents.size() > 0) {
+            id = listStudents.size() + 1;
+        }
+        student.setId(id);
+        listStudents.add(student);
+        writeListStudents(listStudents);
+    }
     
      // cập nhật student vào listStudents và lưu listStudents vào file
      // @param student
@@ -80,7 +91,16 @@ public class StudentDao {
         }
         return false;
     }
-
+    
+     // sắp xếp danh sách student theo name theo tứ tự tăng dần
+    public void sortStudentByName() {
+        Collections.sort(listStudents, new Comparator<Student>() {
+            public int compare(Student student1, Student student2) {
+                return student1.getName().compareTo(student2.getName());
+            }
+        });
+    }
+    
      // sắp xếp danh sách student theo GPA theo tứ tự tăng dần
     public void sortStudentByGPA() {
         Collections.sort(listStudents, new Comparator<Student>() {

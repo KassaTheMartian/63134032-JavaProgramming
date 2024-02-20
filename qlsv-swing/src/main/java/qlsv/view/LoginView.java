@@ -28,13 +28,13 @@ public class LoginView extends JFrame implements ActionListener {
     }
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        userNameLabel = new JLabel("UserName");
-        passwordLabel = new JLabel("Password");
+        userNameLabel = new JLabel("Tên đăng nhập");
+        passwordLabel = new JLabel("Mật khẩu");
         userNameField = new JTextField(15);
         passwordField = new JPasswordField(15);
         loginBtn = new JButton();
  
-        loginBtn.setText("Login");
+        loginBtn.setText("Đăng nhập");
         loginBtn.addActionListener(this);
  
         // tạo spring layout
@@ -50,15 +50,15 @@ public class LoginView extends JFrame implements ActionListener {
         panel.add(loginBtn);
  
         // cài đặt vị trí các thành phần trên màn hình login
-        layout.putConstraint(SpringLayout.WEST, userNameLabel, 20, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.WEST, userNameLabel, 50, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, userNameLabel, 80, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, passwordLabel, 20, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.WEST, passwordLabel, 50, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, passwordLabel, 105, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, userNameField, 80, SpringLayout.WEST, userNameLabel);
+        layout.putConstraint(SpringLayout.WEST, userNameField, 110, SpringLayout.WEST, userNameLabel);
         layout.putConstraint(SpringLayout.NORTH, userNameField, 80, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, passwordField, 80, SpringLayout.WEST, passwordLabel);
+        layout.putConstraint(SpringLayout.WEST, passwordField, 110, SpringLayout.WEST, passwordLabel);
         layout.putConstraint(SpringLayout.NORTH, passwordField, 105, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, loginBtn, 80, SpringLayout.WEST, passwordLabel);
+        layout.putConstraint(SpringLayout.WEST, loginBtn, 110, SpringLayout.WEST, passwordLabel);
         layout.putConstraint(SpringLayout.NORTH, loginBtn, 130, SpringLayout.NORTH, panel);
  
         // add panel tới JFrame
