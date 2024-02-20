@@ -19,6 +19,7 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import qlsv.entity.Student;
 
@@ -30,6 +31,7 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
     private JButton clearBtn;
     private JButton sortStudentGPABtn;
     private JButton sortStudentNameBtn;
+    private JButton sortStudentDefaultBtn;
     private JScrollPane jScrollPaneStudentTable;
     private JScrollPane jScrollPaneAddress;
     private JTable studentTable;
@@ -68,6 +70,7 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
         clearBtn = new JButton("Làm mới");
         sortStudentGPABtn = new JButton("Sắp xếp theo GPA");
         sortStudentNameBtn = new JButton("Sắp xếp theo tên");
+        sortStudentDefaultBtn = new JButton("Mặc định");
         // khởi tạo bảng student
         jScrollPaneStudentTable = new JScrollPane();
         studentTable = new JTable();
@@ -95,7 +98,8 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
         studentTable.setModel(new DefaultTableModel((Object[][]) data, columnNames));
         jScrollPaneStudentTable.setViewportView(studentTable);
         jScrollPaneStudentTable.setPreferredSize(new Dimension (480, 300));
-        
+
+
         // tạo spring layout
         SpringLayout layout = new SpringLayout();
         
@@ -111,7 +115,8 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
         panel.add(clearBtn);
         panel.add(sortStudentGPABtn);
         panel.add(sortStudentNameBtn);
-         
+        panel.add(sortStudentDefaultBtn);
+
         panel.add(idLabel);
         panel.add(nameLabel);
         panel.add(ageLabel);
@@ -164,7 +169,11 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
         layout.putConstraint(SpringLayout.NORTH, sortStudentGPABtn, 330, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sortStudentNameBtn, 155, SpringLayout.WEST, sortStudentGPABtn);
         layout.putConstraint(SpringLayout.NORTH, sortStudentNameBtn, 330, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, sortStudentDefaultBtn, 150, SpringLayout.WEST, sortStudentNameBtn);
+        layout.putConstraint(SpringLayout.NORTH, sortStudentDefaultBtn, 330, SpringLayout.NORTH, panel);
     
+        
+        
         this.add(panel);
         this.pack();
         this.setTitle("Student Information");
@@ -197,6 +206,10 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
             students[i][4] = list.get(i).getGPA();
         }
         studentTable.setModel(new DefaultTableModel(students, columnNames));
+        
+        // Thiết lập độ rộng cho cột thứ 1 và 2 (index 0 và 1)
+        studentTable.getColumnModel().getColumn(0).setPreferredWidth(30);
+        studentTable.getColumnModel().getColumn(1).setPreferredWidth(150);
     }
     
      // điền thông tin của hàng được chọn từ bảng student 
@@ -350,7 +363,11 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
     public void addSortStudentNameListener(ActionListener listener) {
         sortStudentNameBtn.addActionListener(listener);
     }
-     
+    
+    public void addSortStudentDefaultListener(ActionListener listener) {
+    	sortStudentDefaultBtn.addActionListener(listener);
+    }
+    
     public void addListStudentSelectionListener(ListSelectionListener listener) {
         studentTable.getSelectionModel().addListSelectionListener(listener);
     }

@@ -24,6 +24,7 @@ public class StudentController {
         view.addClearListener(new ClearStudentListener());
         view.addSortStudentGPAListener(new SortStudentGPAListener());
         view.addSortStudentNameListener(new SortStudentNameListener());
+        view.addSortStudentDefaultListener(new SortStudentDefaultListener());
         view.addListStudentSelectionListener(new ListStudentSelectionListener());
     }
     
@@ -91,6 +92,13 @@ public class StudentController {
     class SortStudentNameListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             studentDao.sortStudentByName();
+            studentView.showListStudents(studentDao.getListStudents());
+        }
+    }
+    
+    class SortStudentDefaultListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            studentDao.sortStudentDefault();
             studentView.showListStudents(studentDao.getListStudents());
         }
     }

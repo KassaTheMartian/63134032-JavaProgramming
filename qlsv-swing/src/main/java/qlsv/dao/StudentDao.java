@@ -96,22 +96,38 @@ public class StudentDao {
     public void sortStudentByName() {
         Collections.sort(listStudents, new Comparator<Student>() {
             public int compare(Student student1, Student student2) {
-                return student1.getName().compareTo(student2.getName());
+                // Lấy phần tên (bỏ qua họ và tên đệm) của sinh viên
+                String lastName1 = student1.getName().substring(student1.getName().lastIndexOf(' ') + 1);
+                String lastName2 = student2.getName().substring(student2.getName().lastIndexOf(' ') + 1);
+                
+                // So sánh phần tên của hai sinh viên
+                return lastName1.compareTo(lastName2);
             }
         });
     }
     
-     // sắp xếp danh sách student theo GPA theo tứ tự tăng dần
+     // sắp xếp danh sách student theo GPA theo tứ tự giảm dần
     public void sortStudentByGPA() {
         Collections.sort(listStudents, new Comparator<Student>() {
             public int compare(Student student1, Student student2) {
-                if (student1.getGPA() > student2.getGPA()) {
+                if (student1.getGPA() < student2.getGPA()) {
                     return 1;
                 }
                 return -1;
             }
         });
     }
+    // sắp xếp danh sách mặc định khi bật chương trình lên
+   public void sortStudentDefault() {
+       Collections.sort(listStudents, new Comparator<Student>() {
+           public int compare(Student student1, Student student2) {
+               if (student1.getId() > student2.getId()) {
+                   return 1;
+               }
+               return -1;
+           }
+       });
+   }
     
 	public List<Student> getListStudents() {
 		return listStudents;
