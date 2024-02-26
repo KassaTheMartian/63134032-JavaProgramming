@@ -16,15 +16,17 @@ public class MayTinh extends JFrame implements ActionListener {
 
         textField = new JTextField();
         textField.setPreferredSize(new Dimension(200, 50)); // Thiết lập kích thước ưu tiên chiều dài là 200 và chiều cao là 30
-        Font font = new Font("Arial", Font.BOLD, 20); // Ví dụ: font Arial, đậm, kích thước 20
+        Font font = new Font("Arial", Font.BOLD, 30); // Ví dụ: font Arial, đậm, kích thước 20
         textField.setFont(font);
         add(textField, BorderLayout.NORTH);
 
         JPanel panel = new JPanel(new GridLayout(4, 4));
         String[] buttonLabels = {"7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "C", "0", "=", "+"};
+        Font buttonFont = new Font("Arial", Font.BOLD, 20); // Ví dụ: kích thước là 20
 
         for (String label : buttonLabels) {
             JButton button = new JButton(label);
+            button.setFont(buttonFont); // Thiết lập font cho nút
             button.addActionListener(this);
             panel.add(button);
         }
