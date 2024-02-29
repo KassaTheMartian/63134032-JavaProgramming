@@ -74,12 +74,12 @@ public class GiaiPT2 extends JFrame {
 			}
 		});
 		btnNghiem.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNghiem.setBounds(183, 157, 173, 36);
+		btnNghiem.setBounds(195, 157, 173, 36);
 		contentPane.add(btnNghiem);
 		
 		txtNghiem = new JTextArea();
 		txtNghiem.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		txtNghiem.setBounds(106, 223, 311, 91);
+		txtNghiem.setBounds(106, 223, 358, 91);
 		contentPane.add(txtNghiem);
 	}
 	
