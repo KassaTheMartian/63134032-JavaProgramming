@@ -9,6 +9,5 @@ Chào mừng bạn đến với repository của tôi! Đây là nơi tôi lưu 
 
 ## Cấu Trúc Thư Mục
 LAB 1 - 8: bài tập thực hành cơ bản.   
-TH_... : các bài thực hành.
-JavaSwing_MayTinh : máy tính đơn giản gồm các phép + - * / dùng JavaSwing.   
-qlsv-swing: quản lí sinh viên cơ bản dùng JavaSwing.   
+TH_... : các bài thực hành về java swing.  
+THplus_... : các bài thực hành làm thêm về java swing
