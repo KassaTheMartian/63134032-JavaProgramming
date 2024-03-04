@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -85,21 +87,30 @@ public class GiaiPT2 extends JFrame {
 	
 	public void giaiPT2()
 	{
-		double a = Double.parseDouble(txtA.getText());
-		double b = Double.parseDouble(txtB.getText());	
-		double c = Double.parseDouble(txtC.getText());
+
+		try {
+			double a = Double.parseDouble(txtA.getText());
+		    double b = Double.parseDouble(txtB.getText());
+		    double c = Double.parseDouble(txtC.getText());
+		    
+			double detal = b*b-4*a*c;
+			
+			if (detal < 0) txtNghiem.setText("Phương trình vô nghiệm");
+			if (detal == 0) 
+			{
+				txtNghiem.setText("Phương trình có nghiệm kép: " + (-b/(2*a)));
+			}
+			if (detal > 0)
+			{
+				txtNghiem.setText("Phương trình có hai nghiệm:" + "\nX1:\t" + (-b-Math.sqrt(detal)/(2*a) + "\nX2:\t" + (-b+Math.sqrt(detal)/(2*a))));
+			}
 		
-		double detal = b*b-4*a*c;
+		} catch (NumberFormatException e) {
+		    // Xử lý ngoại lệ NumberFormatException ở đây
+		    // Ví dụ: Hiển thị một thông báo lỗi
+		    JOptionPane.showMessageDialog(null, "Các giá trị nhập không hợp lệ. Vui lòng nhập lại số.");
+		}
 		
-		if (detal < 0) txtNghiem.setText("Phương trình vô nghiệm");
-		if (detal == 0) 
-		{
-			txtNghiem.setText("Phương trình có nghiệm kép: " + (-b/(2*a)));
-		}
-		if (detal > 0)
-		{
-			txtNghiem.setText("Phương trình có hai nghiệm:" + "\nX1:\t" + (-b-Math.sqrt(detal)/(2*a) + "\nX2:\t" + (-b+Math.sqrt(detal)/(2*a))));
-		}
-	
+
 	}
 }
